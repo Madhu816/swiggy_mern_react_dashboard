@@ -1,23 +1,84 @@
-import React from 'react'
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { API_URL } from '../data/ApiPath';
 
-const Login = () => {
+const Login = ({handleWelcome,setShowLogout}) => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const loginHandler = async (event) => {
+        event.preventDefault();
+        try {
+            // const response = await fetch(`http://localhost:3000/vender/login`, {
+            const response = await fetch(`${API_URL}/vender/login`, {
+
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email, password })
+            });
+            const data = await response.json();
+            if (response.ok) {
+                alert("Login is Success");
+                setEmail("")
+                setPassword("")
+                localStorage.setItem("loginToken", data.token);
+                setShowLogout(true);
+                handleWelcome();
+            }
+            const venderId=data.venderId;
+            console.log("checkeing for venderId :", venderId)
+
+    
+            // const venderResponse=await fetch(`http://localhost:3000/vender/single-vender/${venderId}`)
+            const venderResponse = await fetch(`${API_URL}/vender/single-vender/${venderId}`);
+            const venderData=await venderResponse.json();
+            if(venderResponse.ok){
+                const venderFirmId=venderData.venderFirmId;
+                const vendername=venderData.vender.firm[0].firmname;
+                console.log("vender name",vendername);
+                console.log("checking for firmid :",venderFirmId);
+                localStorage.setItem('firmId',venderFirmId);
+                localStorage.setItem('firmname',vendername);
+                window.location.reload();// for refresh login and logout
+            }
+
+            
+
+        } catch (error) {
+            console.log(error);
+            alert("Login Failed");
+        }
+    };
+
     return (
         <div>
             <div className="loginSection">
-                <form className="authForm">
-                <h1>Vender Login</h1><br />
+                <form className="authForm" onSubmit={loginHandler}>
+                    <h1>Vender Login</h1><br />
                     <label>Email :</label>
-                    <input type="text" placeholder="enter the email" /><br />
-                    <label>Passoword :</label>
-                    <input type="password" placeholder="enter the password" /><br />
+                    <input
+                        type="text"
+                        name="email"
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
+                        placeholder="Enter the email"
+                    /><br />
+                    <label>Password :</label>
+                    <input
+                        type="password"
+                        name="password"
+                        value={password}
+                        onChange={(event) => setPassword(event.target.value)}
+                        placeholder="Enter the password"
+                    /><br />
                     <div className="btnSubmit">
-                        <button>Submit</button>
+                        <button type='submit'>Submit</button>
                     </div>
                 </form>
             </div>
         </div>
-    )
-}
+    );
+};
+
 export default Login;

@@ -1,13 +1,13 @@
 import React from 'react'
 
-const SideBar = ({OnAddFirms,OnProducts}) => {
+const SideBar = ({OnAddFirms,OnProducts,onAllProducts,showFirmTitle}) => {
   return (
     <div>
         <div className="sideBar">
             <ul>
-                <li onClick={OnAddFirms}>Add Firm</li>
+              {showFirmTitle?<li onClick={OnAddFirms}>Add Firm</li> : ""}
                 <li onClick={OnProducts}>Add Product</li>
-                <li>All Product</li>
+                <li onClick={onAllProducts}>All Product</li>
                 <li>User Detail</li>
             </ul>
         </div>

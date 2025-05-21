@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { API_URL } from '../data/ApiPath';
 
 
-const Register = () => {
+const Register = ({handleLogin}) => {
     const [username,setUsername]=useState("")
     const [email,setEmail]=useState("")
     const [password,setPassword]=useState("")
@@ -11,7 +11,9 @@ const Register = () => {
     const handleSubmit=async (event) => {
         event.preventDefault();
         try {
-            const response=await fetch(`${API_URL}/vender/register`,{
+            // const response=await fetch(`http://localhost:3000/vender/register`,{
+            const response = await fetch(`${API_URL}/vender/register`, {
+
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json"
@@ -21,11 +23,15 @@ const Register = () => {
             const data=await response.json();
             console.log(data);
             if(response.ok){
+                setUsername("");
+                setEmail("");
+                setPassword("");
                 console.log(data);
                 alert("vender Regiser Sucessfully")
+                handleLogin();
             }
         } catch (error) {
-            console.error(error)
+            console.error(error);
             alert("Registration failed");
             
         }
