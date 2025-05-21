@@ -68,7 +68,7 @@ const AddProducts = () => {
       }
    
     } catch (error) {
-      console.log("error");
+      console.log(error);
       alert("Failed to add product");
 
     }
