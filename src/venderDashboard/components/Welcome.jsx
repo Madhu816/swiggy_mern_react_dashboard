@@ -7,7 +7,7 @@ const Welcome = () => {
     <div className='welcomeSection'>
         <h2>Welcome {firmName}</h2>
         <div className="landingImage">
-          <img src='/assets/chefAuty.jpg' alt='welcome' />
+          <img src='/assets/chefAunty.jpg' alt='welcome' />
         </div>
     </div>
   )
