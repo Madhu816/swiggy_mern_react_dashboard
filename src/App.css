@@ -238,3 +238,15 @@ h1 {
     font-weight: 700;
     border-radius: 10px;
 }
+
+.welcomeSection {
+    color: #f77f00;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* optional for horizontal centering */
+    height: 100vh; /* optional for full-screen height */
+    font-size: 24px;
+    font-weight: bold;
+    padding-left: 250px;
+}
+
