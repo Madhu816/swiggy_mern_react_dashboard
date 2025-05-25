@@ -127,6 +127,7 @@
     box-shadow: 5px -2px 5px 0px rgba(0, 0, 0, 0.75);
     -webkit-box-shadow: 5px -2px 5px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 5px -2px 5px 0px rgba(0, 0, 0, 0.75);
+    margin-top: 10px;
 }
 
 .tableForm input {
@@ -153,7 +154,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 30px;
     margin-left: -70px;
 }
 
@@ -237,6 +238,8 @@ h1 {
     color:black;
     font-weight: 700;
     border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 20px;
 }
 
 .welcomeSection {
