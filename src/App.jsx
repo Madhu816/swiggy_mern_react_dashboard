@@ -1,8 +1,9 @@
 import React from "react";
 import LandingPage from "./venderDashboard/pages/LandingPage";
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route } from "react-router-dom" //importing routes
 import "./App.css";
 import NotFound from "./venderDashboard/components/NotFound";
+import UserDetails from "./venderDashboard/components/UserDetails";
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/*" element={<NotFound/>}/>
       </Routes>
-    </div>
+    </div>              
   )
 }
 export default App;

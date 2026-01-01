@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import NavBar from '../components/NavBar'
 import SideBar from '../components/SideBar'
 import Login from '../components/forms/Login'
@@ -7,8 +7,8 @@ import AddFirms from '../components/forms/AddFirms'
 import AddProducts from '../components/forms/AddProducts'
 import Welcome from '../components/Welcome'
 import AllProduct from '../components/AllProduct'
-
-import { useState,useEffect } from 'react'
+import UserDetails from '../components/UserDetails';
+import { useState,useEffect } from 'react';
 const LandingPage = () => {
   const [login,setlogin]=useState(false)
   const [register,setregister]=useState(false)
@@ -17,36 +17,39 @@ const LandingPage = () => {
   const [showWelcome,setshowWelcome]=useState(false)
   const [showAllProducts,setShowAllProducts]=useState(false);
   const [showLogout,setShowLogout]=useState(false);
-  const [showFirmTitle,setShowFirmTitle]=useState(true);
+  const [showFirmTitle,setShowFirmTitle]=useState(true); //if firmname is there remove firmprodus
+  const [showUserDetails, setShowUserDetails] = useState(false);
+
 
   useEffect(()=>{
-    const loginToken=localStorage.getItem('loginToken');
+    const loginToken = localStorage.getItem('loginToken');
     if(loginToken){
       setShowLogout(true);
       setshowWelcome(true);
     }
   },[]);
+
+  //if firmTitle is there then remove
   useEffect(()=>{
     const firmname=localStorage.getItem('firmname');
     if(firmname){
       setShowFirmTitle(false);
       setshowWelcome(true);
     }
-
   },[])
 
-  const logoutHandle=()=>{
+  //when click on the logout remove enter data
+  const logoutHandler=()=>{
     confirm("Are you sure to logout..")
     localStorage.removeItem('loginToken');
     localStorage.removeItem('firmId');
     localStorage.removeItem('firmname');
+    localStorage.removeItem("venderId");  
     setShowLogout(false);
-    setShowFirmTitle(true);
+    setShowFirmTitle(true); 
     setshowWelcome(false);
+    setShowUserDetails(false);
   }
-  
-
-
   
   let handleLogin=()=>{
     setlogin(true);
@@ -55,7 +58,7 @@ const LandingPage = () => {
     setshowProduct(false);
     setshowWelcome(false);
     setShowAllProducts(false);
-
+    setShowUserDetails(false);
   }
   let handleRegister=()=>{
     setregister(true);
@@ -64,7 +67,7 @@ const LandingPage = () => {
     setshowProduct(false);
     setshowWelcome(false);
     setShowAllProducts(false);
-  
+    setShowUserDetails(false);
   }
 
    let handleFirms=()=>{
@@ -75,6 +78,7 @@ const LandingPage = () => {
     setshowProduct(false);
     setshowWelcome(false);
     setShowAllProducts(false);
+    setShowUserDetails(false);
     }else{
       alert("Please Login First");
       setlogin(true);
@@ -90,6 +94,7 @@ const LandingPage = () => {
     setshowProduct(true);
     setshowWelcome(false);
     setShowAllProducts(false);
+    setShowUserDetails(false);
     }else{
       alert("Please Login First");
       setlogin(true);
@@ -103,6 +108,7 @@ const LandingPage = () => {
     setshowProduct(false);
     setshowWelcome(true);
     setShowAllProducts(false);
+    setShowUserDetails(false);
   }
     let handleAllProducts=()=>{
     if(showLogout){
@@ -111,6 +117,7 @@ const LandingPage = () => {
     setshowFirm(false);
     setshowProduct(false);
     setshowWelcome(false);
+    setShowUserDetails(false);
     setShowAllProducts(true);
     }else{
       alert("Please Login First");
@@ -118,21 +125,41 @@ const LandingPage = () => {
     }
   }
 
+  let handleUserDetails = () => {
+  if (showLogout) {
+    setregister(false);
+    setlogin(false);
+    setshowFirm(false);
+    setshowProduct(false);
+    setshowWelcome(false);
+    setShowAllProducts(false);
+    setShowUserDetails(true);
+  } else {
+    alert("Please Login First...");
+    setlogin(true);
+  }
+};
+
 
   return (
     <>
         <section className="landingSection">
+        {/* //Sending the the data using props.. */}
         <NavBar OnLoginClick={handleLogin} OnRegister={handleRegister} showLogout={showLogout}
-        logoutHandle={logoutHandle}/>
+        logoutHandler={logoutHandler}/>
+        
         <div className="collectionSection">
         <SideBar OnAddFirms={handleFirms} OnProducts={handleProducts} onAllProducts={handleAllProducts}
-        showFirmTitle={showFirmTitle}/>
+        firmTitle = {showFirmTitle} onUserDetails = {handleUserDetails}/>
+        {/* when its true then its opens */}
         {login && <Login  handleWelcome={handleWelcome} setShowLogout={setShowLogout} />}
         {register && <Register handleLogin={handleLogin} setShowLogout={setShowLogout} />}
-        {showFirm && showLogout && <AddFirms/>}
-        {showProduct && showLogout && <AddProducts/>}
+        {showFirm  && <AddFirms/>}
+        {showProduct && <AddProducts/>}
         {showWelcome && <Welcome/>}
         {showAllProducts && <AllProduct/>}
+        {showUserDetails && <UserDetails />}
+
         </div>
         </section>
     </>

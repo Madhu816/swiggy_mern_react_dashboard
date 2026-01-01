@@ -19,10 +19,12 @@ const Login = ({handleWelcome,setShowLogout}) => {
             });
             const data = await response.json();
             if (response.ok) {
-                alert("Login is Success");
+                alert("Login is Success...");
                 setEmail("")
                 setPassword("")
+                // in localstoarge genetate the token
                 localStorage.setItem("loginToken", data.token);
+                localStorage.setItem("venderId", data.venderId);
                 setShowLogout(true);
                 handleWelcome();
             }
@@ -35,16 +37,13 @@ const Login = ({handleWelcome,setShowLogout}) => {
             const venderData=await venderResponse.json();
             if(venderResponse.ok){
                 const venderFirmId=venderData.venderFirmId;
-                const vendername=venderData.vender.firm[0].firmname;
+                const vendername=venderData.vender.firm[0].firmname;// firmName
                 console.log("vender name",vendername);
                 console.log("checking for firmid :",venderFirmId);
                 localStorage.setItem('firmId',venderFirmId);
-                localStorage.setItem('firmname',vendername);
+                localStorage.setItem('firmname',vendername);//store vendor name
                 window.location.reload();// for refresh login and logout
             }
-
-            
-
         } catch (error) {
             console.log(error);
             alert("Login Failed");
@@ -57,12 +56,7 @@ const Login = ({handleWelcome,setShowLogout}) => {
                 <form className="authForm" onSubmit={loginHandler}>
                     <h1>Vender Login</h1><br />
                     <label>Email :</label>
-                    <input
-                        type="text"
-                        name="email"
-                        value={email}
-                        onChange={(event) => setEmail(event.target.value)}
-                        placeholder="Enter the email"
+                    <input type="text" name="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Enter the email"
                     /><br />
                     <label>Password :</label>
                     <input

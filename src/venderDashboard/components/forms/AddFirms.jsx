@@ -12,7 +12,7 @@ const AddFirms=()=> {
 
     const handleCategoryChange=(event)=>{
         const value=event.target.value;
-        if(category.includes(value)){
+        if(category.includes(value)){//if category already exits just remove it
             setCategory(category.filter((item)=>item!==value))
         }
         else{
@@ -28,9 +28,10 @@ const AddFirms=()=> {
             setRegion([...region,value])
         }
     }
+    //images
     const handleImageUpload=(event)=>{
-        const selectdImage=event.target.files[0];
-        setFile(selectdImage);
+        const selectdImage=event.target.files[0]; // [0] - taken only 1-file
+        setFile(selectdImage);// assingn the image
 
     }
 
@@ -39,6 +40,8 @@ const AddFirms=()=> {
     const handleFirmsSubmit=async(event)=>{
         event.preventDefault();
         try {
+
+            //get the token
             const loginToken=localStorage.getItem("loginToken");
             if(!loginToken){
                 console.error("User not authentication")
@@ -49,6 +52,7 @@ const AddFirms=()=> {
             formData.append('offer',offer);
             formData.append('image',file);
 
+            //multiple category and regions
             category.forEach((value)=>{
                 formData.append('category',value)
             })
@@ -59,7 +63,7 @@ const AddFirms=()=> {
             // const response=await fetch(`http://localhost:3000/firm/add`,{
             const response = await fetch(`${API_URL}/firm/add`, {
 
-                method:"POST",
+                method:"POST",//send the token
                 headers:{
                     'token':`${loginToken}`
                 },
@@ -77,9 +81,9 @@ const AddFirms=()=> {
                 alert("Firm Add sucessfully");
 
             }else if(data.message==="vender can have only one firm"){
-                alert("Only 1 firm can be added 🏢.")
+                alert("Only 1 firm can be added 🏢.");
             }else{
-                alert("Failed to add Firm")
+                alert("Failed to add Firm");
             }
             console.log(data.firmId)
             const firmId=data.firmId;
@@ -98,12 +102,12 @@ const AddFirms=()=> {
                 <div className="firmSection">
                     <form className="tableForm" onSubmit={handleFirmsSubmit}>
                         <h1>Add Firm</h1>
-                        <label>Firm Name</label>
-                        <input type="text" name="firmname"  value={firmname} onChange={(event)=>setFirmname(event.target.value)}/>
-                        <label>Area</label>
-                        <input type="text"  name="area" value={area} onChange={(event)=>setArea(event.target.value)}/>
+                        <label>Firm Name :</label>
+                        <input type="text" name="firmname"  value={firmname} onChange={(event)=>setFirmname(event.target.value)} placeholder="Enter Your Restarent Name..."/>
+                        <label>Area :</label>
+                        <input type="text"  name="area" value={area} onChange={(event)=>setArea(event.target.value)}placeholder="Enter Your Restarent Location..."/>
                         <div className="checkinp">
-                            <label>Category</label>
+                            <label>Category :</label>
                             <div className="inputsContainer">
                             <div className="checkboxContainer">
                                 <label>Veg</label>
@@ -116,7 +120,7 @@ const AddFirms=()=> {
                             </div>
                             </div>
                            <div className="checkinp">
-                            <label>Region</label>
+                            <label>Region :</label>
                             <div className="inputsContainer">
                             <div className="checkboxContainer">
                                 <label>South-Indian</label>
@@ -136,8 +140,8 @@ const AddFirms=()=> {
                                 </div>
                             </div>
                             </div>
-                            <label>Oferr</label>
-                            <input type="text" name="offer" value={offer} onChange={(event)=>setOffer(event.target.value)}/>
+                            <label>Oferr :</label>
+                            <input type="text" name="offer" value={offer} onChange={(event)=>setOffer(event.target.value)} placeholder="Enter Offer Represent.."/>
                             <label>Firm Image</label>
                             <input type="file"  onChange={handleImageUpload}/>
                             <div className="btnSubmit">

@@ -6,7 +6,7 @@ const AddProducts = () => {
   let [productName, setProductName] = useState("");
   let [price, setPrice] = useState("");
   let [category, setCategory] = useState([]);
-  const [file,setFile]=useState(null);
+  const[file,setFile] = useState(null);
   let [bestSeller, setBestSeller] = useState(false);
   let [description, setDescription] = useState("");
 
@@ -33,8 +33,10 @@ const AddProducts = () => {
   const handleProduct = async (event) => {
     event.preventDefault();
     try {
+      // taken id,token of firm .. It is in localstoarage
       const loginToken = localStorage.getItem("loginToken");
       const firmId = localStorage.getItem("firmId");
+      // my logic if token not take we cannt have firmid
       if (!loginToken || !firmId) {
         return console.log("user not authentication");
       }
@@ -79,13 +81,13 @@ const AddProducts = () => {
       <div className="productSection">
         <form className="tableForm" onSubmit={handleProduct}>
           <h1>Add Product</h1>
-          <label>Product Name </label>
-          <input type="text" value={productName} onChange={(event)=>setProductName(event.target.value)} />
-          <label>Price</label >
-          <input type="text" value={price} onChange={(event)=>setPrice(event.target.value)}/>
+          <label>Product Name :</label>
+          <input type="text" value={productName} onChange={(event)=>setProductName(event.target.value)} placeholder="Enter Your Product Name..."/>
+          <label>Price :</label >
+          <input type="text" value={price} onChange={(event)=>setPrice(event.target.value)} placeholder="Enter Your Product Price..."/>
 
           <div className="checkinp">
-            <label>Category</label>
+            <label>Category :</label>
             <div className="inputsContainer">
               <div className="checkboxContainer">
                 <label>Veg</label>
@@ -98,7 +100,7 @@ const AddProducts = () => {
             </div>
           </div>
           <div className="checkinp">
-            <label>BestSeller</label>
+            <label>BestSeller :</label>
             <div className="inputsContainer">
               <div className="checkboxContainer">
                 <label>Yes</label>
@@ -110,9 +112,9 @@ const AddProducts = () => {
               </div>
             </div>
           </div>
-          <label>Description</label>
-          <input type="text" value={description} onChange={(event)=>setDescription(event.target.value)}/>
-          <label>Image</label>
+          <label>Description :</label>
+          <input type="text" value={description} onChange={(event)=>setDescription(event.target.value)} placeholder="Enter Product Special..."/>
+          <label>Image :</label>
           <input type="file" onChange={handleImageUpload}/>
           <div className="btnSubmit">
             <button type='submit'>Submit</button>

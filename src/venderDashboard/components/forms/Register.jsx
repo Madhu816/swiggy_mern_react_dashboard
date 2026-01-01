@@ -12,9 +12,11 @@ const Register = ({handleLogin}) => {
         event.preventDefault();
         try {
             // const response=await fetch(`http://localhost:3000/vender/register`,{
+            // fetch can do get the data from the server
             const response = await fetch(`${API_URL}/vender/register`, {
-
+                //for sending
                 method:"POST",
+                //standard
                 headers:{
                     "Content-Type":"application/json"
                 },
@@ -22,17 +24,26 @@ const Register = ({handleLogin}) => {
             });
             const data=await response.json();
             console.log(data);
+
+        if (!response.ok) {
+        alert("Email is exits Try with another Mail...");
+        setUsername("");
+        setEmail("");
+        setPassword("");
+        return;
+        }
             if(response.ok){
                 setUsername("");
                 setEmail("");
                 setPassword("");
                 console.log(data);
-                alert("vender Regiser Sucessfully")
+                alert("vender Regiser Sucessfully ");
+                // using props receving hadleLogin and call it;
                 handleLogin();
             }
         } catch (error) {
             console.error(error);
-            alert("Registration failed");
+            confirm("Registration failed Or Try with another mail");
             
         }
         
@@ -43,6 +54,7 @@ const Register = ({handleLogin}) => {
             <form className="authForm" onSubmit={handleSubmit}>
                 <h1>Vender Register</h1><br />
                 <label> Username :</label>
+                {/* // name = "username" match to  const [username,setUsername]=useState("") */}
                 <input type="text"  name="username" value={username} onChange={(event)=>setUsername(event.target.value)} placeholder="enter the username" /><br />
                 <label>Email :</label>
                 <input type="text" name="email" value={email} onChange={(event)=>setEmail(event.target.value)} placeholder="enter the email" /><br />

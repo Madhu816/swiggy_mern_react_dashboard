@@ -27,7 +27,6 @@ const AllProduct = () => {
         console.log("this is useEffect")
 
     },[]);
-
     const deleteProductById=async(productId)=>{
         try {
             // const response=await fetch(`http://localhost:3000/product/${productId}`,{
@@ -41,26 +40,24 @@ const AllProduct = () => {
             }
         } catch (error) {
             console.log("Failed to Delete")
-            alert("Failed to delete");
-
-            
+            alert("Failed to delete");            
         }
 
     }
-
   return (
     <div>
         {!products?(
-            <p>there is no product added</p>
+            <div className="noProduct">
+            <img src="/assests/noProduct.jpg" alt="no product"/>
+            </div>
         ):(
             <table className="product-table">
                 <thead>
                     <tr>
-                        <th>ProductName</th>              
-                        <th>Price</th>
-                        <th>Image</th>
+                        <th>PRODUCT - NAME</th>              
+                        <th>PRICE</th>
+                        <th>IMAGE</th>
                         <th>Delete</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -68,8 +65,8 @@ const AllProduct = () => {
                         return(
                             <>
                             <tr key={item._id}>
-                            <td>{item.productName}</td>
-                            <td>{item.price}</td>
+                            <td>{item.productName.toUpperCase()}</td>
+                            <td>RS. {item.price}</td>
                             <td>
                                 {item.image && (
                                     // <img src={`http://localhost:3000/uploads/${item.image}`}
@@ -83,7 +80,6 @@ const AllProduct = () => {
                                 <button onClick={()=>deleteProductById(item._id)}>Delete</button>
                             </td>
                             </tr>
-
                             </>
                         )
                     })}

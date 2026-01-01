@@ -5,12 +5,16 @@
     font-style: normal;
 }
 
+/* justify-content :  horizontal
+align-items : vertical */
+
 .navSection {
     /* border: 1px solid blue; */
     height: 80px;
     display: flex;
     justify-content: space-between;
-    padding: 0px 20px;
+    padding: 0px 20px; 
+    /* topandbottonm - 0 and left and right -20px; */
     align-items: center;
     font-size: larger;
     /* background-color: blue; */
@@ -34,40 +38,30 @@
 
 .sideBar ul li {
     list-style: none;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     font-weight: 500;
     font-size: medium;
     cursor: pointer;
 }
 
+.sideBar li:hover {
+    color : red;
+}
+
+
 /* login-Section */
 .collectionSection {
     display: flex;
-
 }
 
-
-.loginSection {
+.loginSection,.registerSection{
     width: 1000px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 70px;
+    margin-top: 70px; 
     margin-left: -70px;
-
-
-}
-
-.registerSection {
-    width: 1000px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 70px;
-    margin-left: -70px;
-
 }
 
 .authForm {
@@ -79,7 +73,7 @@
     justify-content: center;
     justify-items: center;
     align-items: center;
-    height: 50vh;
+    height: 70vh;
     margin-left: 200px;
     border-radius: 14px;
 }
@@ -88,12 +82,13 @@
     width: 100%;
     max-width: 60%;
     border-color: red;
-    height: 2.4rem;
+    height: 30px;
     padding-left: 10px;
 }
 
 .authForm label {
-    width: 100%;
+    /* border:1px solid red; */
+    width: 100%; 
     max-width: 60%;
     font-weight: bold;
     padding: 4px 10px;
@@ -177,43 +172,69 @@
 .checkboxContainer {
     display: flex;
     align-items: center;
-    gap: 1px;
+    gap: 5px;
 
 }
 
 .checkboxContainer label {
-    padding: 0px 10px;
+    /* padding: 0px 10px;
+    width: 100px;
+    max-width:90px;
+    font-size: 15px; */
+    
     font-size: 15px;
+    padding: 0;     /* remove unwanted padding */
+    width: auto;
 }
-
 .checkboxContainer input[type="checkbox"] {
     width: 18px;
     height: 18px;
     accent-color: #007bff;
     /* Optional: makes checkbox blue */
+    margin:0px 0px;
+    cursor:pointer;
 }
 
 
 /* product table */
 .product-table {
     border: 2px solid salmon;
-    width: 80vw;
+    width: 70vw;
     border-collapse: collapse;
     margin-top: 50px;
-    margin-left: 15px;
+    margin-left: 70px;
 }
 
 .product-table th,
 .product-table td {
-    border: 1px solid rgb(13, 255, 0);
-    padding: 10px;
+    border: 1px solid orange;
+    padding: 5px;
     text-align: center;
     font-weight: bolder;
     font-family: 'Times New Roman', Times, serif;
+    cursor:pointer;
 }
 
 .product-table th {
     background-color: gainsboro;
+}
+
+.noProduct {
+border:1px solid red;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  /* margin-right:30px; */
+  height:100%;
+  width:100%;
+}
+.noProduct img{
+    border:1px solid blue;
+    width:60%;
+    height:60%;
+    margin-top:-100px;
+    border-radius:  20px;
+
 }
 
 /* Not found */
@@ -253,3 +274,26 @@ h1 {
     padding-left: 250px;
 }
 
+.user-details{
+    border:1px solid red;
+    width : 100%;
+    height:100%;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:30px 30px;
+    font-family: "Times New Roman", Times, serif;;
+}
+.detail-card h2{
+    margin-top:-10px;
+    color: brown;
+}
+.detail-card,.productlist {
+    list-style-type: none;   /* removes bullets */
+    border: 1px solid black;
+    padding: 15px;
+    margin: 15px auto;
+    width: 60%;
+    border-radius: 8px;
+    background: lab(88.97% 0.68 0.23);
+}
