@@ -45,6 +45,7 @@ export default function UserDetails() {
         <p><strong>Email :</strong> {vender.email}</p>
       </div>
       {/* Firm Card */}
+      <div className="detailcard-23">
       <div className="detail-card">
         <h2>🏢 Firm Details</h2>
         {vender.firm.length > 0 ? (
@@ -72,6 +73,7 @@ export default function UserDetails() {
         ) : (
           <p>No Products Found</p>
         )}
+      </div>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { useState } from 'react'
 import { API_URL } from '../data/ApiPath';
 
-const AddFirms=()=> {
+const AddFirms=({product})=> {
     const [firmname,setFirmname]=useState("");
     const [area,setArea]=useState("");
     const [category,setCategory]=useState([]);
@@ -72,6 +72,9 @@ const AddFirms=()=> {
             const data=await response.json();
             if(response.ok){
                 console.log(data);
+                localStorage.setItem("firmId", data.firmId);
+                localStorage.setItem("firmname", data.firmname);
+
                 setFirmname("");
                 setArea("");
                 setCategory([]);
@@ -79,15 +82,16 @@ const AddFirms=()=> {
                 setOffer("");
                 setFile(null);
                 alert("Firm Add sucessfully");
+                product();
 
             }else if(data.message==="vender can have only one firm"){
                 alert("Only 1 firm can be added 🏢.");
             }else{
                 alert("Failed to add Firm");
             }
-            console.log(data.firmId)
-            const firmId=data.firmId;
-            localStorage.setItem('firmId',firmId);
+            // console.log(data.firmId)
+            // const firmId=data.firmId;
+            // localStorage.setItem('firmId',firmId);
             
         } catch (error) {
             console.log(error);

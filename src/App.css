@@ -21,8 +21,11 @@ align-items : vertical */
     background-color: #f77f00;
     color: white;
     cursor: pointer;
+    text-transform: capitalize;
 }
-
+.company{
+    color:white;
+}
 /* side-Bar */
 
 .sideBar {
@@ -282,7 +285,11 @@ h1 {
     align-items:center;
     text-align:center;
     padding:30px 30px;
-    font-family: "Times New Roman", Times, serif;;
+    font-family: "Times New Roman", Times, serif;
+
+}
+.detailcard-23{
+      text-transform:capitalize;
 }
 .detail-card h2{
     margin-top:-10px;

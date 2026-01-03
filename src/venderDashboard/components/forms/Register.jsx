@@ -25,13 +25,13 @@ const Register = ({handleLogin}) => {
             const data=await response.json();
             console.log(data);
 
-        if (!response.ok) {
-        alert("Email is exits Try with another Mail...");
-        setUsername("");
-        setEmail("");
-        setPassword("");
-        return;
-        }
+        // if (!response.ok) {
+        // alert("Email is exits Try with another Mail...");
+        // setUsername("");
+        // setEmail("");
+        // setPassword("");
+        // return;
+        // }
             if(response.ok){
                 setUsername("");
                 setEmail("");

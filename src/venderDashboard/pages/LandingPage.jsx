@@ -154,7 +154,7 @@ const LandingPage = () => {
         {/* when its true then its opens */}
         {login && <Login  handleWelcome={handleWelcome} setShowLogout={setShowLogout} />}
         {register && <Register handleLogin={handleLogin} setShowLogout={setShowLogout} />}
-        {showFirm  && <AddFirms/>}
+        {showFirm  && <AddFirms product={handleProducts}/>}
         {showProduct && <AddProducts/>}
         {showWelcome && <Welcome/>}
         {showAllProducts && <AllProduct/>}

@@ -36,6 +36,7 @@ const AddProducts = () => {
       // taken id,token of firm .. It is in localstoarage
       const loginToken = localStorage.getItem("loginToken");
       const firmId = localStorage.getItem("firmId");
+      console.log("ssssssssss"+firmId);
       // my logic if token not take we cannt have firmid
       if (!loginToken || !firmId) {
         return console.log("user not authentication");
@@ -66,7 +67,7 @@ const AddProducts = () => {
         setCategory([]);
         setBestSeller(false);
         setFile(null);
-        setDescription("")
+        setDescription("");
       }
    
     } catch (error) {
